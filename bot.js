@@ -30,3 +30,24 @@ bot.on('message', msg => {
     }
   }
 });
+
+bot.on('guildMemberAdd', member => {
+
+  const welcomeEmbed = new Discord.MessageEmbed();
+
+  welcomeEmbed.setColor('#5cf000')
+  welcomeEmbed.setTitle('**' + member.user.username + '** is now Among Us other **' + (member.guild.memberCount - 1) + '** people')
+  welcomeEmbed.setDescription('Hi, ' + '<@' + member.user.id + '> ! We are happy to see you here!')
+  welcomeEmbed.setImage('https://www.bing.com/th?id=OIP.-eKx0rCRrBVkABUHSyo2RwHaEK&w=170&h=96&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2')
+
+  member.guild.channels.cache.find(i => i.name === '👋︱welcome').send(welcomeEmbed)
+});
+
+bot.on('guildMemberRemove', member => {
+  const goodbyeEmbed = new Discord.MessageEmbed()
+
+  goodbyeEmbed.setColor('#f00000')
+  goodbyeEmbed.setTitle('**' + member.user.username + '** left us! There are now **' + member.guild.memberCount + '** left Among Us!')
+
+  member.guild.channels.cache.find(i => i.name === '👋︱welcome').send(goodbyeEmbed)
+});
