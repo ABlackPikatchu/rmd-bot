@@ -5,5 +5,6 @@ module.exports = {
     CurseForge: require('./curseforge'),
     Hi: require('./hi'),
     Rule: require('./rule'),
-    Good_Night: require('./good_night')
+    Good_Night: require('./good_night'),
+    Test: require('./test')
   };
