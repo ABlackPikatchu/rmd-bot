@@ -19,7 +19,7 @@ module.exports = {
                 "e.g.: Running __(prefix)embed This-is-a-todo #ffffff this is a to-do text__\n\n" +
                 "Will result in an embed with the text *This-is-a-todo*, the colour *#ffffff* and the description *this is a to-do text*"
             );
-            msg.channel.send({ embeds: [helpEmbed] })
+            msg.channel.send({ embeds: [helpEmbed] });
         }
     }
 };

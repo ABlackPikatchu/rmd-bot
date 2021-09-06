@@ -16,9 +16,7 @@ module.exports = {
             toDoEmbed.setTitle(title);
             const description = msg.toString().substring(colour.length + title.length + 9);
             toDoEmbed.setDescription(description);
-            msg.channel.send({
-                embeds: [toDoEmbed]
-            })
+            msg.channel.send({ embeds: [toDoEmbed] });
         } else msg.reply('You do not have the required permissions!')
     }
 };

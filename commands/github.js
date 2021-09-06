@@ -11,6 +11,6 @@ module.exports = {
     name: 'github',
     description: 'Github Link',
     execute(msg, args) {
-        msg.channel.send({ embeds: [githubEmbed] })
+        msg.channel.send({ embeds: [githubEmbed] });
     }
 };
