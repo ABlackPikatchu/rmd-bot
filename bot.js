@@ -8,7 +8,7 @@ const bot = new Discord.Client({
     Intents.FLAGS.GUILD_MESSAGES, 
     Intents.FLAGS.GUILD_INVITES, 
     Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.BAN_MEMBERS
+    Intents.FLAGS.GUILD_BANS
   ]
 })
 bot.login(process.env.BOT_TOKEN);
