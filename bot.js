@@ -11,6 +11,7 @@ let prefix = '+';
 
 Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
+  console.log(botCommands[key].name + " command loaded!");
 });
 
 bot.on('messageCreate', msg => {
