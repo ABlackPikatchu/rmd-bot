@@ -13,7 +13,7 @@ Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
 });
 
-bot.on('message', msg => {
+bot.on('messageCreate', msg => {
   const args = msg.content.split(/ +/);
   let command = args.shift().toLowerCase();
   if (command.startsWith(prefix)) {
