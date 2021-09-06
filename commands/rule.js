@@ -1,5 +1,6 @@
 module.exports = {
     name: 'rule',
+    aliases: ['rules'],
     description: 'Shows a rule',
     execute(msg, args) {
         if (args == 1) msg.channel.send(

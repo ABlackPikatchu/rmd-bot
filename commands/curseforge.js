@@ -1,5 +1,6 @@
 module.exports = {
     name: 'curseforge',
+    aliases: ['cf'],
     description: 'Curseforge info',
     execute(msg, args) {
         msg.reply(
