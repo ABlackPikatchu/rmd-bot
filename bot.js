@@ -3,7 +3,13 @@ require('dotenv').config();
 const { Intents } = require('discord.js');
 const fs = require('fs');
 const bot = new Discord.Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_INVITES, Intents.FLAGS.GUILD_MEMBERS]
+  intents: [
+    Intents.FLAGS.GUILDS, 
+    Intents.FLAGS.GUILD_MESSAGES, 
+    Intents.FLAGS.GUILD_INVITES, 
+    Intents.FLAGS.GUILD_MEMBERS,
+    Intents.FLAGS.BAN_MEMBERS
+  ]
 })
 bot.login(process.env.BOT_TOKEN);
 bot.commands = new Discord.Collection();
