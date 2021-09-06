@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const { Intents } = require('discord.js');
 const bot = new Discord.Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_INVITES, Intents.FLAGS.GUILD_MEMBERS]
 })
 bot.login(process.env.BOT_TOKEN);
 bot.commands = new Discord.Collection();
@@ -32,7 +32,7 @@ bot.on('message', msg => {
 });
 
 bot.on('guildMemberAdd', member => {
-
+  if (member.guild.memberCount <= 100) member.roles.add(member.guild.roles.cache.find(i => i.name === 'Early Supporter'))
   const welcomeEmbed = new Discord.MessageEmbed();
 
   welcomeEmbed.setColor('#5cf000')

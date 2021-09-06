@@ -6,7 +6,7 @@ module.exports = {
     Hi: require('./hi'),
     Rule: require('./rule'),
     Good_Night: require('./good_night'),
-    ToDo: require('./to-do'),
+    Embed: require('./embed'),
     Help: require('./help'),
     Test: require('./test')
   };
