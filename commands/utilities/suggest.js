@@ -4,7 +4,7 @@ module.exports = {
     name: 'suggest',
     aliases: aliases,
     description: 'Sends a suggestion',
-    execute(message, args) {
+    execute(message, args, bot) {
         const type = args.shift().toLowerCase();
         if (type === 'mod') {
             const modChannel = message.guild.channels.cache.find(i => i.name === '🎮︱mod-suggestions');

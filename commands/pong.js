@@ -1,7 +1,7 @@
 module.exports = {
     name: 'pong',
     description: 'Pong!',
-    execute(msg, args) {
+    execute(msg, args, bot) {
         msg.reply('ping');
     }
 };

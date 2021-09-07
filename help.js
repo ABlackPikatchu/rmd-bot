@@ -28,7 +28,7 @@ module.exports = {
   name: 'help',
   description: 'Offers help about a command!',
   helpEmbed: helpEmbed,
-  execute(msg, args) {
+  execute(msg, args, bot) {
     if (args[0] != null) {
       let command = args.shift().toString().toLowerCase();
 
@@ -45,11 +45,11 @@ module.exports = {
           msg.reply('there was an error trying to execute that command!');
         }
       } else {
-        helpEmbed.setDescription(`Unknown command *${command}*!\n\n` + `Run *` + "help" + `* for a list of commands!`).setColor('RED');
+        helpEmbed.setDescription(`Unknown command *${command}*!\n\n` + `Run *` + bot.prefix + "help" + `* for a list of commands!`).setColor('RED');
         msg.reply({ embeds: [helpEmbed] })
       }
     } else {
-      var description = 'Run *help commandName* for help with a specific command!\n\nCommand List:\n';
+      var description = 'Run *' + bot.prefix + 'help commandName* for help with a specific command!\n\nCommand List:\n';
       var addToDescription;
       Object.keys(botCommands).map(key => {
         if (botCommands[key].aliases != null) addToDescription = "**" + botCommands[key].name + "**" + " (aliases: *" + botCommands[key].aliases + "*): " + botCommands[key].description + "\n";

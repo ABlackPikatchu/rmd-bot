@@ -2,7 +2,7 @@ module.exports = {
     name: 'rule',
     aliases: ['rules'],
     description: 'Shows a rule',
-    execute(msg, args) {
+    execute(msg, args, bot) {
         if (args == 1) msg.channel.send(
             "**1. Follow Discord's TOS**\n" + 
             "https://discordapp.com/terms/\n" +

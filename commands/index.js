@@ -7,7 +7,6 @@ module.exports = {
     Rule: require('./rule'),
     Good_Night: require('./good_night'),
     Embed: require('./embed'),
-    Test: require('./test'),
 
     //Moderation
     Slowmode: require('./moderation/slowmode'),
@@ -15,4 +14,5 @@ module.exports = {
 
     //Utilities
     Suggest: require('./utilities/suggest'),
+    Uptime: require('./utilities/uptime')
   };

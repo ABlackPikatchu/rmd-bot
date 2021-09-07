@@ -10,7 +10,7 @@ const githubEmbed = new MessageEmbed()
 module.exports = {
     name: 'github',
     description: 'Github Link',
-    execute(msg, args) {
+    execute(msg, args, bot) {
         msg.channel.send({ embeds: [githubEmbed] });
     }
 };

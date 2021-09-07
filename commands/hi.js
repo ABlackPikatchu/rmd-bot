@@ -3,7 +3,7 @@ module.exports = {
     name: 'hi',
     aliases: ['hello', 'hallo'],
     description: 'Hi!',
-    execute(msg, args) {
+    execute(msg, args, bot) {
         msg.reply('Hallo!');
     }
 };

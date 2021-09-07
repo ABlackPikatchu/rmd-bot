@@ -2,7 +2,7 @@ const { MessageEmbed, Permissions } = require('discord.js');
 module.exports = {
 	name: 'role',
 	description: 'Adds or Removes a role form the mentioned member',
-	execute(message, args) {
+	execute(message, args, bot) {
 		const action = args.shift();
 		if (action === 'add') {
 			if (!message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {

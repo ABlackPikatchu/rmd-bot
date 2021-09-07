@@ -13,9 +13,9 @@ const helpEmbed = new MessageEmbed()
         { name: "Usage", value: "embed ***title colour description***", inline: false },
         {
             name: "Arguments", value:
-                "**title** - the title of the embed, has to be one word (e.g This-Is-An-Embed)\n" +
-                "**colour** - the colour of the embed, has to be an hex value (e.g. #11f0f0)\n" +
-                "**description** - the description of the embed\n\n"
+                "**title** - the title of the embed, has to be one word (e.g This-Is-An-Embed) (mandatory)\n" +
+                "**colour** - the colour of the embed, has to be an hex value (e.g. #11f0f0) (mandatory)\n" +
+                "**description** - the description of the embed (mandatory)\n\n"
             , inline: false
         }
     );
@@ -25,7 +25,7 @@ module.exports = {
     aliases: aliases,
     helpEmbed: helpEmbed,
     description: 'Sends an embed!',
-    execute(msg, args) {
+    execute(msg, args, bot) {
         if (msg.member.roles.cache.some(role => role.name === '⚔️ Staff') || msg.member.roles.cache.some(role => role.name === 'Embed Creator') || msg.channel == msg.member.guild.channels.cache.find(i => i.name === '🎉︱self-promotion')) {
             const title = args.shift();
             const colour = args.shift();
