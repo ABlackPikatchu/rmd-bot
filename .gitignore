@@ -1,4 +1,5 @@
 .env
 .bat
+slashCommandsRegister.js
 package.json
 node_modules/
