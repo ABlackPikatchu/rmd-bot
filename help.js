@@ -14,6 +14,8 @@ var commands = new Discord.Collection();
 
 const bot = require("./bot.js")
 
+console.log("Loaded help command for: " + Object.keys(botCommands));
+console.log("Loaded help messages for:")
 Object.keys(botCommands).map(key => {
   commands.set(botCommands[key].name, botCommands[key]);
   if (botCommands[key].aliases != undefined) {
@@ -21,8 +23,8 @@ Object.keys(botCommands).map(key => {
       commands.set(botCommands[key].aliases[aliasKey], botCommands[key]);
     })
   }
+  if (botCommands[key].helpEmbed != null) console.log("*" + botCommands[key].name + "* with the aliases: *" + botCommands[key].aliases + "*")
 });
-console.log("Loaded help messages for: " + Object.keys(botCommands));
 
 module.exports = {
   name: 'help',
@@ -57,7 +59,7 @@ module.exports = {
         description += addToDescription;
       });
       commandList.setDescription(description);
-      msg.reply({embeds: [commandList]});
+      msg.reply({ embeds: [commandList] });
     }
   }
 };

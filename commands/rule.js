@@ -1,6 +1,21 @@
+const { MessageEmbed } = require('discord.js');
+const aliases = ['rules'];
+const helpEmbed = new MessageEmbed()
+    .setTitle("How to use the **RULE** command!")
+    .setColor('RANDOM')
+    .addFields(
+        { name: "Name", value: "rule", inline: false },
+        { name: "Aliases", value: aliases.toString() + "\n", inline: false },
+        { name: "Usage", value: "rule ***number***", inline: false },
+        {
+            name: "Arguments", value: "**number** - the number of the rule to show (mandatory)" , inline: false
+        }
+    );
+
 module.exports = {
     name: 'rule',
-    aliases: ['rules'],
+    aliases: aliases,
+    helpEmbed: helpEmbed,
     description: 'Shows a rule',
     execute(msg, args, bot) {
         if (args == 1) msg.channel.send(
