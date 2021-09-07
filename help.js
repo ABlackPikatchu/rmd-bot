@@ -5,6 +5,10 @@ let helpEmbed = new MessageEmbed()
   .setTitle('Command Help')
   .setTimestamp();
 
+let commandList = new MessageEmbed()
+  .setColor('#e5df2a')
+  .setTitle('Command List')
+
 const botCommands = require('./commands/index.js');
 var commands = new Discord.Collection();
 
@@ -44,6 +48,16 @@ module.exports = {
         helpEmbed.setDescription(`Unknown command *${command}*!\n\n` + `Run *` + "help" + `* for a list of commands!`).setColor('RED');
         msg.reply({ embeds: [helpEmbed] })
       }
+    } else {
+      var description = 'Run *help commandName* for help with a specific command!\n\nCommand List:\n';
+      var addToDescription;
+      Object.keys(botCommands).map(key => {
+        if (botCommands[key].aliases != null) addToDescription = "**" + botCommands[key].name + "**" + " (aliases: *" + botCommands[key].aliases + "*): " + botCommands[key].description + "\n";
+        else addToDescription = "**" + botCommands[key].name + "**: " + botCommands[key].description + "\n";
+        description += addToDescription;
+      });
+      commandList.setDescription(description);
+      msg.reply({embeds: [commandList]});
     }
   }
 };
