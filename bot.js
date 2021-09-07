@@ -1,14 +1,15 @@
 const Discord = require('discord.js');
 require('dotenv').config();
-const { Intents, Collection } = require('discord.js');
+const { Intents, Collection, MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const bot = new Discord.Client({
   intents: [
-    Intents.FLAGS.GUILDS, 
-    Intents.FLAGS.GUILD_MESSAGES, 
-    Intents.FLAGS.GUILD_INVITES, 
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_INVITES,
     Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_BANS
+    Intents.FLAGS.GUILD_BANS,
+    Intents.FLAGS.DIRECT_MESSAGES
   ]
 })
 bot.login(process.env.BOT_TOKEN);
@@ -33,7 +34,7 @@ bot.slashCommands = new Collection();
 const slashCommandFiles = fs.readdirSync('./slashCommands').filter(file => file.endsWith('.js'));
 
 for (const file of slashCommandFiles) {
-	const command = require(`./slashCommands/${file}`);
+  const command = require(`./slashCommands/${file}`);
   bot.slashCommands.set(command.data.name, command);
   console.log("Registered slash command: " + command.data.name);
 }
@@ -56,34 +57,44 @@ bot.on('messageCreate', msg => {
   if (command.startsWith(bot.prefix)) {
     command = command.substring(bot.prefix.length, command.length)
     console.info(`Called command: ${command}`);
-    if (command  === 'help') {
+    if (command === 'help') {
       helpCommand.execute(msg, args, bot);
     } else {
-    if (!bot.commands.has(command)) return;
+      if (!bot.commands.has(command)) return;
 
-    try {
-      bot.commands.get(command).execute(msg, args, bot);
-    } catch (error) {
-      console.error(error);
-      msg.reply('there was an error trying to execute that command!');
+      try {
+        if (bot.commands.get(command).permissions == null) bot.commands.get(command).execute(msg, args, bot);
+        else {
+          if (msg.member.permissions.has(bot.commands.get(command).permissions)) {
+            bot.commands.get(command).execute(msg, args, bot);
+          } else {
+            const permsError = new MessageEmbed()
+              .setDescription(`You do not have the required permissions to run the command: **` + command + "**!")
+              .setColor('RED');
+            return msg.reply({ embeds: [permsError] });
+          }
+        }
+      } catch (error) {
+        console.error(error);
+        msg.reply('there was an error trying to execute that command!');
+      }
     }
   }
-}
 });
 
 bot.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+  if (!interaction.isCommand()) return;
 
-	const command = bot.slashCommands.get(interaction.commandName);
+  const command = bot.slashCommands.get(interaction.commandName);
 
-	if (!command) return;
+  if (!command) return;
 
-	try {
-		await command.execute(interaction, bot);
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-	}
+  try {
+    await command.execute(interaction, bot);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+  }
 });
 
 module.exports = bot;

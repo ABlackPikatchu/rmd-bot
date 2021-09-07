@@ -39,7 +39,7 @@ module.exports = {
 		}
     } else {
         const permsError = new MessageEmbed()
-				.setDescription(`You do not have permissions to unlock the channel!.`)
+				.setDescription(`You do not have permissions to unlock the channel!`)
 				.setColor('RED');
 			return message.channel.send({embeds: [permsError]});
     }
