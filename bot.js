@@ -15,7 +15,8 @@ const bot = new Discord.Client({
 bot.login(process.env.BOT_TOKEN);
 bot.commands = new Discord.Collection();
 const botCommands = require('./commands');
-bot.prefix = '+';
+bot.config = require('./config.json');
+bot.prefix = bot.config.prefix;
 
 Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
