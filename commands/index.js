@@ -7,10 +7,12 @@ module.exports = {
     Rule: require('./rule'),
     Good_Night: require('./good_night'),
     Embed: require('./embed'),
-    Help: require('./help'),
     Test: require('./test'),
 
     //Moderation
     Slowmode: require('./moderation/slowmode'),
     Role: require('./moderation/role'),
+
+    //Utilities
+    Suggest: require('./utilities/suggest'),
   };

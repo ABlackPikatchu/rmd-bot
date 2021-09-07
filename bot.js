@@ -25,6 +25,9 @@ Object.keys(botCommands).map(key => {
     console.log("*" + botCommands[key].name + "* command loaded, with the aliases: *" + botCommands[key].aliases.toString() + "* !");
   } else console.log("*" + botCommands[key].name + "* command loaded!");
 });
+console.log("------------------------");
+const helpCommand = require('./help');
+console.log("------------------------");
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
@@ -43,7 +46,9 @@ bot.on('messageCreate', msg => {
   if (command.startsWith(prefix)) {
     command = command.substring(prefix.length, command.length)
     console.info(`Called command: ${command}`);
-
+    if (command  === 'help') {
+      helpCommand.execute(msg, args);
+    } else {
     if (!bot.commands.has(command)) return;
 
     try {
@@ -53,6 +58,7 @@ bot.on('messageCreate', msg => {
       msg.reply('there was an error trying to execute that command!');
     }
   }
+}
 })
 
 module.exports = bot;
