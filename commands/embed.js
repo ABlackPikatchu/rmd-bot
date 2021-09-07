@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const toDoEmbed = new MessageEmbed()
     .setTitle('Embed')
     .setTimestamp();
+var RegExp = /^#[0-9A-F]{6}$/i;
 
 const aliases = ['to-do'];
 const description = 'Sends an embed!';
@@ -30,13 +31,26 @@ module.exports = {
     execute(msg, args, bot) {
         if (msg.member.roles.cache.some(role => role.name === '⚔️ Staff') || msg.member.roles.cache.some(role => role.name === 'Embed Creator') || msg.channel == msg.member.guild.channels.cache.find(i => i.name === '🎉︱self-promotion')) {
             const title = args.shift();
+            if (!title || RegExp.test(title)) {
+                const titleError = new MessageEmbed()
+                    .setDescription('You need to provide a title!')
+                    .setColor('RED');
+
+                return msg.reply({ embeds: [titleError] });
+            }
             const colour = args.shift();
+            if (!colour || !RegExp.test(colour)) {
+                const colourError = new MessageEmbed()
+                    .setDescription('You need to provide a valid hex colour!')
+                    .setColor('RED');
+
+                return msg.reply({ embeds: [colourError] });
+            }
             toDoEmbed.setColor(colour);
             toDoEmbed.setTitle(title);
             const description = msg.toString().substring(colour.length + title.length + 9);
             toDoEmbed.setDescription(description);
             msg.channel.send({ embeds: [toDoEmbed] });
-            msg.delete();
         } else msg.reply('You do not have the required permissions!')
     }
 };
