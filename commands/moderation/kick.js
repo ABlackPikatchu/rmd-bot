@@ -36,7 +36,7 @@ module.exports = {
         try {
             const DMKickSuccess = new MessageEmbed()
                 .setTitle('Kick')
-                .setDescription(`You got kicked in ${message.guild.name}!`)
+                .setDescription(`You got kicked in ${message.guild.name} by ${message.member.user}!`)
                 .addField(`Reason:`, `${reason ? `**${reason}**` : ''}`, false);
 
 

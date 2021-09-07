@@ -55,7 +55,7 @@ module.exports = {
         try {
             const DMBanSuccess = new MessageEmbed()
                 .setTitle('Ban')
-                .setDescription(`You got banned in ${message.guild.name} by ${message.member.username}!`)
+                .setDescription(`You got banned in ${message.guild.name} by ${message.member.user}!`)
                 .addField(`Reason:`, `${reason ? `**${reason}**` : ''}`, false);
 
 

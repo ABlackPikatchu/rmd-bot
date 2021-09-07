@@ -33,7 +33,7 @@ module.exports = {
         try {
             const DMUnbanSuccess = new MessageEmbed()
                 .setTitle('Un-Ban')
-                .setDescription(`You got un-banned in ${message.guild.name} by ${message.member.username}!`)
+                .setDescription(`You got un-banned in ${message.guild.name} by ${message.member.user}!`)
 
 
             const unbanSuccess = new MessageEmbed()

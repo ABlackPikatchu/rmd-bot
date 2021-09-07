@@ -55,7 +55,7 @@ module.exports = {
 
 		const DMEmbed = new MessageEmbed()
 			.setTitle(`Mute`)
-			.setDescription(`You got muted in ${message.guild.name} by ${message.member.username}!`)
+			.setDescription(`You got muted in ${message.guild.name} by ${message.member.user}!`)
             .addField(`Reason:`, `${reason ? `**${reason}**` : ''}`, false);
 
 

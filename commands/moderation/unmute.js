@@ -30,7 +30,7 @@ module.exports = {
 
 		const DMEmbed = new MessageEmbed()
 			.setTitle(`Unmute`)
-			.setDescription(`You got unmuted in ${message.guild.name} by ${message.member.username}!`)
+			.setDescription(`You got unmuted in ${message.guild.name} by ${message.member.user}!`)
 
 		try {
 			user.roles.remove(muterole);
