@@ -9,8 +9,8 @@ const data = new SlashCommandBuilder()
 
 module.exports = {
 	data: data,
-	async execute(interaction) {
+	async execute(interaction, bot) {
 		const helpFile = require('../help.js')
-		helpFile.execute(interaction, [interaction.options.getString('command')]);
+		helpFile.execute(interaction, [interaction.options.getString('command')], bot);
 	},
 };
