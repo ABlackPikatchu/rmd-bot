@@ -39,7 +39,7 @@ module.exports = {
 		}
     } else {
         const permsError = new MessageEmbed()
-				.setDescription(`You do not have permissions to lock the channel!`)
+				.setDescription(`You do not have permissions to lock the channel specified!`)
 				.setColor('RED');
 			return message.channel.send({embeds: [permsError]});
     }

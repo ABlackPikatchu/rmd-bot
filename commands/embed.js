@@ -4,9 +4,11 @@ const toDoEmbed = new MessageEmbed()
     .setTimestamp();
 
 const aliases = ['to-do'];
+const description = 'Sends an embed!';
 const helpEmbed = new MessageEmbed()
     .setTitle("How to use the **EMBED** command!")
     .setColor('RANDOM')
+    .setDescription(description)
     .addFields(
         { name: "Name", value: "embed", inline: false },
         { name: "Aliases", value: aliases.toString() + "\n", inline: false },
@@ -24,7 +26,7 @@ module.exports = {
     name: 'embed',
     aliases: aliases,
     helpEmbed: helpEmbed,
-    description: 'Sends an embed!',
+    description: description,
     execute(msg, args, bot) {
         if (msg.member.roles.cache.some(role => role.name === '⚔️ Staff') || msg.member.roles.cache.some(role => role.name === 'Embed Creator') || msg.channel == msg.member.guild.channels.cache.find(i => i.name === '🎉︱self-promotion')) {
             const title = args.shift();
