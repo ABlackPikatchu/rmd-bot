@@ -11,6 +11,8 @@ module.exports = {
     //Moderation
     Slowmode: require('./moderation/slowmode'),
     Role: require('./moderation/role'),
+    Lock: require('./moderation/lock'),
+    Unlock: require('./moderation/unlock'),
 
     //Utilities
     Suggest: require('./utilities/suggest'),
