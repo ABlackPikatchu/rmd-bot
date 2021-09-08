@@ -16,9 +16,9 @@ module.exports = {
         let seconds = totalSeconds % 60;
         uptime.setDescription(
             "I have been online for:\n" +
-            `${seconds} seconds or\n` +
-            `${minutes} minutes or\n` +
-            `${hours} hours or\n` +
+            `${seconds} seconds and\n` +
+            `${minutes} minutes and\n` +
+            `${hours} hours and\n` +
             `${days} days\n`
         );
         msg.reply({embeds: [uptime]});
