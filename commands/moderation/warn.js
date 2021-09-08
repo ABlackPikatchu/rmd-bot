@@ -135,6 +135,6 @@ module.exports = {
                 .setColor('#544B94');
 
             return message.channel.send({ embeds: [embed] });
-        }
+        } else return message.reply(`Unknown type **${type}**! Run *${bot.prefix}help warn* for help with the command!`)
     }
 };
