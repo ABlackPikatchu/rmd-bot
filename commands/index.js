@@ -19,6 +19,7 @@ module.exports = {
     Ban: require('./moderation/ban'),
     Unban: require('./moderation/unban'),
     Clear: require('./moderation/clear'),
+    React: require('./moderation/react'),
 
     //Utilities
     Suggest: require('./utilities/suggest'),

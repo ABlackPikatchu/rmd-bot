@@ -9,14 +9,19 @@ const bot = new Discord.Client({
     Intents.FLAGS.GUILD_INVITES,
     Intents.FLAGS.GUILD_MEMBERS,
     Intents.FLAGS.GUILD_BANS,
-    Intents.FLAGS.DIRECT_MESSAGES
-  ]
+    Intents.FLAGS.DIRECT_MESSAGES,
+    Intents.FLAGS.GUILD_PRESENCES,
+    Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+    Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+  ],
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 })
 bot.login(process.env.BOT_TOKEN);
 bot.commands = new Discord.Collection();
 const botCommands = require('./commands');
 bot.config = require('./config.json');
 bot.prefix = bot.config.prefix;
+const emoji = require('./JSON/emoji.json')
 
 Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
