@@ -10,6 +10,7 @@ const helpEmbed = new MessageEmbed()
         { name: "Name", value: "clear", inline: false },
         { name: "Aliases", value: aliases.toString() + "\n", inline: false },
         { name: "Usage", value: "clear ***number***", inline: false },
+        { name: 'Permissions/Roles Required', value: '**MANAGE_MESSAGES** in the channel it was ran in', inline: false },
         {
             name: "Arguments", value:
                 "**number** - the number of messages to delete (between 1 and 100) (mandatory)\n" , inline: false

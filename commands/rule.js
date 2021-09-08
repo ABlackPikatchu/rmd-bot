@@ -9,6 +9,7 @@ const helpEmbed = new MessageEmbed()
         { name: "Name", value: "rule", inline: false },
         { name: "Aliases", value: aliases.toString() + "\n", inline: false },
         { name: "Usage", value: "rule ***number***", inline: false },
+        { name: 'Permissions/Roles Required', value: 'none', inline: false },
         {
             name: "Arguments", value: "**number** - the number of the rule to show (mandatory)" , inline: false
         }

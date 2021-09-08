@@ -1,8 +1,31 @@
 const { MessageEmbed, Permissions, GuildMember } = require('discord.js');
 const db = require('quick.db');
+
+const description = 'Does stuff regarding warns';
+const aliases = ['warns', 'warning', 'warnings']
+const helpEmbed = new MessageEmbed()
+    .setTitle("How to use the **WARN** command!")
+    .setColor('RANDOM')
+    .setDescription(description)
+    .addFields(
+        { name: "Name", value: "warn", inline: false },
+        { name: "Aliases", value: aliases.toString() + "\n", inline: false },
+        { name: "Usage", value: "warn ***type member reason/number***", inline: false },
+        { name: 'Permissions/Roles Required', value: '**KICK_MEMBERS** and **BAN_MEMBERS**', inline: false },
+        {
+            name: "Arguments", value:
+                "**type** - new, list or clear (mandatory)\n" +
+                "**member** - the member you want to warn or show their warnings or clear their warnings (mandatory)\n" +
+                "**reason/number** - if the type is **new**, the reason for warning the member; if the type is **clear** the number of the warning to clear (or *all* to clear all warnings) (mandatory, depending on command type)\n\n"
+            , inline: false
+        }
+    );
+
 module.exports = {
     name: 'warn',
-    description: 'Does stuff regarding warns',
+    description: description,
+    aliases: aliases,
+    helpEmbed: helpEmbed,
     permissions: [Permissions.FLAGS.BAN_MEMBERS, Permissions.FLAGS.KICK_MEMBERS],
     async execute(message, args, bot) {
         const type = args.shift().toLowerCase();
