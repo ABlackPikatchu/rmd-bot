@@ -43,6 +43,7 @@ module.exports = {
 				.setColor('GREEN');
 
 			message.channel.send({ embeds: [embed] });
+			message.delete();
 		} else if (action === 'remove') {
 			const member = message.mentions.members.first();
 			if (!member) {
@@ -73,6 +74,7 @@ module.exports = {
 				.setColor('GREEN');
 
 			message.channel.send({ embeds: [embed] });
+			message.delete();
 		} else return message.reply('Unknown action!');
 	} 
 };

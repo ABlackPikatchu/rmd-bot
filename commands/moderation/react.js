@@ -4,9 +4,12 @@ module.exports = {
     description: 'Makes the bot react to a message',
     async execute(msg, args, bot) {
         if (msg.channel.permissionsFor(msg.member).has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-        const msgID = args.shift().toLowerCase();
-        const m = await msg.channel.messages.fetch(msgID);
-        args.forEach(emoji => {
+        const msgID = args.shift();
+        let m = null;
+        try {
+        m = await msg.channel.messages.fetch(msgID);
+        } catch {}
+        if (m != null) args.forEach(emoji => {
             m.react(emoji);
         });
     } else {

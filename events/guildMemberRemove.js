@@ -10,7 +10,7 @@ module.exports = {
                         rolesList.push(role.name);
                 })
 
-                db.set(`roles_${member.id}`, rolesList);
+                db.set(`roles.${member.id}`, rolesList);
                 const goodbyeEmbed = new MessageEmbed();
 
                 goodbyeEmbed.setColor('#f00000')

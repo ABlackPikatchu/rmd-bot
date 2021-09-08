@@ -18,6 +18,7 @@ module.exports = {
     Unmute: require('./moderation/unmute'),
     Ban: require('./moderation/ban'),
     Unban: require('./moderation/unban'),
+    Warning: require('./moderation/warn'),
     Clear: require('./moderation/clear'),
     React: require('./moderation/react'),
 

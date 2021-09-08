@@ -4,7 +4,7 @@ module.exports = {
         name: 'guildMemberAdd',
         once: false,
         async execute(member) {
-                let oldRoles = await db.fetch(`roles_${member.id}`);
+                let oldRoles = await db.fetch(`roles.${member.id}`);
                 oldRoles.forEach(roleName => {
                         role = member.guild.roles.cache.find(x => x.name === roleName);
                         if (role) member.roles.add(role);
