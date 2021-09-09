@@ -49,13 +49,13 @@ module.exports = {
                 DMChannel
                     .send({ embeds: [DMKickSuccess] })
                     .then(() => {
-                        message.channel.send({ embeds: [kickSuccess] })
-                        mentionedMember
-                            .kick(reason)
+                        
                     }).catch((e) => {
                         console.log('Failed to kick!', e);
                     });
             });
+            message.channel.send({ embeds: [kickSuccess] })
+            mentionedMember.kick(reason)
         } catch (error) {
             console.log(error);
             const errorEmbed = new MessageEmbed()

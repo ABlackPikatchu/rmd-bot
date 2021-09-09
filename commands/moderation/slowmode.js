@@ -4,7 +4,7 @@ module.exports = {
 	description: 'Activates / Disables slowmode in the channel it is ran in!',
 	aliases: ['sm'],
     execute(message, args, bot) {
-        if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+        if (!message.channel.permissionsFor(message.member).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
 			const slowmodeError = new MessageEmbed()
 				.setDescription(`You do not have permissions to enable/disable slowmode.`)
 				.setColor('RED');

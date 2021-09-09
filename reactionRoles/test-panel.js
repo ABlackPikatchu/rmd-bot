@@ -6,5 +6,6 @@ module.exports = {
         {id: '885061616058630186', emoji: emoji.one, name: 'Test Role 1'},
         {id: '885061672379744256', emoji: emoji.two, name: 'Test Role 2'}
     ],
-    DMMessage: true
+    DMMessage: true,
+    onlyOneRole: true
 }

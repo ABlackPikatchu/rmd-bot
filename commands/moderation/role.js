@@ -1,6 +1,7 @@
 const { MessageEmbed, Permissions } = require('discord.js');
 module.exports = {
 	name: 'role',
+	aliases: ['roles'],
 	description: 'Adds or removes a role form the mentioned member',
 	permissions: [Permissions.FLAGS.ADMINISTRATOR],
 	execute(message, args, bot) {
@@ -27,7 +28,7 @@ module.exports = {
 
 			if (selfPosition <= mentionedPosition) {
 				const posi = new MessageEmbed()
-					.setDescription(`You cannot add role to this member as their role is higher/equal to yours.`)
+					.setDescription(`You cannot add roles to this member as their role is higher/equal to yours.`)
 					.setColor('RED');
 				return message.channel.send({ embeds: [posi] });
 			}
@@ -60,6 +61,16 @@ module.exports = {
 					.setDescription(`No Roles Provided`)
 					.setColor('RED');
 				return message.channel.send({ embeds: [addroleError2] });
+			}
+
+			const mentionedPosition = member.roles.highest.position;
+			const selfPosition = message.member.roles.highest.position;
+
+			if (selfPosition <= mentionedPosition) {
+				const posi = new MessageEmbed()
+					.setDescription(`You cannot remove roles from this member as their role is higher/equal to yours.`)
+					.setColor('RED');
+				return message.channel.send({ embeds: [posi] });
 			}
 			
 			if (!member.roles.cache.get(roleToRemove.id)) {

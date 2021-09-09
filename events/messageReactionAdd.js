@@ -34,6 +34,13 @@ module.exports = {
             if (roles.get(reaction.message.id).channelID === reaction.message.channel.id) {
                 roles.get(reaction.message.id).roles.forEach(role => {
                     if (role.emoji === reaction.emoji.name) {
+
+                        if (roles.get(reaction.message.id).onlyOneRole) {
+                            roles.get(reaction.message.id).roles.forEach(roleToRemove => {
+                                if (userRoles.cache.get(roleToRemove.id)) userRoles.remove(roleToRemove.id);
+                            })
+                        }
+
                         if (!userRoles.cache.get(role.id)) {
                             userRoles.add(role.id);
                             if (roles.get(reaction.message.id).DMMessage) {
@@ -41,7 +48,7 @@ module.exports = {
                                     .setTitle('Role')
                                     .setDescription(`You got the role **${role.name}** in the server **${reaction.message.guild.name}**!`)
                                     .setColor(reaction.message.guild.roles.cache.get(role.id).hexColor);
-                                user.send({ embeds: [successEmbed] });
+                                return user.send({ embeds: [successEmbed] });
                             }
                         } else {
                             if (roles.get(reaction.message.id).DMMessage) {
@@ -49,7 +56,7 @@ module.exports = {
                                     .setTitle('Role')
                                     .setDescription(`I cannot give you the role **${role.name}** in the server **${reaction.message.guild.name}** because you already have it!`)
                                     .setColor(reaction.message.guild.roles.cache.get(role.id).hexColor);
-                                user.send({ embeds: [successEmbed] });
+                                return user.send({ embeds: [successEmbed] });
                             }
                         }
                     }

@@ -5,7 +5,7 @@ module.exports = {
         once: false,
         async execute(member) {
                 let oldRoles = await db.fetch(`roles.${member.id}`);
-                oldRoles.forEach(roleName => {
+                if (oldRoles != null) oldRoles.forEach(roleName => {
                         role = member.guild.roles.cache.find(x => x.name === roleName);
                         if (role) member.roles.add(role);
                         else console.log(`Encountered error while re-adding on-join roles to ${member}: Unknown role name *${roleName}*`);

@@ -8,6 +8,9 @@ module.exports = {
     Good_Night: require('./good_night'),
     Embed: require('./embed'),
 
+    //Information
+    UserInfo: require('./information/user-info'),
+
     //Moderation
     Slowmode: require('./moderation/slowmode'),
     Role: require('./moderation/role'),
