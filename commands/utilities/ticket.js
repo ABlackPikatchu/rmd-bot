@@ -9,6 +9,8 @@ module.exports = {
     aliases: ['tickets'],
     description: 'Stuff regarding tickets',
     async execute(message, args, bot) {
+        if (message.member.roles.cache.has(rolesJSON.ticket_blacklist)) return message.reply(`You are blacklisted from tickets! You cannot create one!`)
+
         const type = args.shift().toLowerCase();
 
         if (type === 'new') {

@@ -20,7 +20,7 @@ bot.login(process.env.BOT_TOKEN);
 const quickdb = require('quick.db');
 bot.commands = new Discord.Collection();
 const botCommands = require('./commands');
-bot.config = require('./config.json');
+bot.config = require('./JSON/config.json');
 bot.prefix = bot.config.prefix;
 if (quickdb.get('prefix') != null) bot.prefix = quickdb.get('prefix');
 const emoji = require('./JSON/emoji.json');
@@ -88,7 +88,7 @@ bot.on('messageCreate', msg => {
         msg.reply('there was an error trying to execute that command!');
       }
     }
-  } else autoMod.execute(msg, args, bot);
+  } else if (bot.config.auto_mod.enabled) autoMod.execute(msg, args, bot);
 });
 
 bot.on('interactionCreate', async interaction => {

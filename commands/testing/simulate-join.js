@@ -3,6 +3,14 @@ module.exports = {
     aliases: ['simjoin'],
     description: 'Simulates an user join',
     execute (msg, args, bot) {
-        bot.emit('guildMemberAdd', msg.member)
+        if (!args[0]) bot.emit('guildMemberAdd', msg.member);
+        else {
+            const user = msg.guild.members.cache.get(args[0])
+            try {
+                bot.emit('guildMemberAdd', user);
+            } catch (e) {
+                console.log('failed to simulate join!', e)
+            }
+        }
     }
 }

@@ -1,9 +1,12 @@
 const { MessageEmbed } = require('discord.js');
 const db = require('quick.db');
-var violationsTable = new db.table(`violations`)
+const channelsJSON = require('../JSON/channels.json');
+const violations = require('./violations.js');
+var violationsTable = new db.table(`violations`);
 
 module.exports = {
-    async execute(word, msg, bot, spamLogs) {
+    async execute(word, msg, bot) {
+        const spamLogs = msg.guild.channels.cache.get(channelsJSON.spam_logs);
         const msgDeletedEmbed = new MessageEmbed()
                 .setTitle(`Message Deleted`)
                 .setDescription(`A message sent by ${msg.member} has been deleted in ${msg.channel}`)
@@ -13,8 +16,6 @@ module.exports = {
                 .setColor('RED');
         spamLogs.send({embeds: [msgDeletedEmbed]});
         msg.delete();
-        let violations = await violationsTable.fetch(`${msg.member.id}`)
-        violations++;
-        violationsTable.set(`${msg.member.id}`, violations);
+        violations.execute(word, msg, bot, 'banned_word')
     }
 }

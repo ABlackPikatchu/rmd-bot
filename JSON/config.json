@@ -1,0 +1,18 @@
+{
+    "prefix": "+",
+
+    "auto_mod": {
+        "enabled": true,
+        "violations": {
+            "max": 7,
+            "DMOnViolation": true
+        },
+        "ignored_roles": [
+            "871030809744777221"
+        ]
+    },
+
+    "warns": {
+        "max": 3
+    }
+}
