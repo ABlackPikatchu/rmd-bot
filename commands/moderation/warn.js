@@ -1,5 +1,6 @@
 const { MessageEmbed, Permissions, GuildMember } = require('discord.js');
-const db = require('quick.db');
+const quickdb = require('quick.db');
+const db = new quickdb.table('warns')
 
 const description = 'Does stuff regarding warns';
 const aliases = ['warns', 'warning', 'warnings']
@@ -37,8 +38,8 @@ module.exports = {
                     .setColor('RED');
                 return message.channel.send({ embeds: [warnError2] });
             }
-            
-            let warnDoc = await db.fetch(`warns.${mentionedUser.id}`);
+
+            let warnDoc = await db.fetch(`${mentionedUser.id}`);
 
             const listEmbed = new MessageEmbed()
                 .setTitle(`Warnings list of ${mentionedUser.displayName}`)
@@ -58,12 +59,13 @@ module.exports = {
                 return message.channel.send({ embeds: [warnError2] });
             }
 
-            const number = args[1]
+            var number = args[1];
+            if (!number) number = 'all';
 
             const numberError = new MessageEmbed()
                 .setDescription(`Unknown warning number : **${number}**!\nRun *${bot.prefix}warn list <@${mentionedUser.id}>* for a list of all their warnings!`)
 
-            let warnDoc = await db.fetch(`warns.${mentionedUser.id}`);
+            let warnDoc = await db.fetch(`${mentionedUser.id}`);
 
             if (!warnDoc || warnDoc == []) {
                 numberError.setDescription(`The user has no warnings!`);
@@ -73,8 +75,8 @@ module.exports = {
 
             if (number.toLowerCase() === 'all') {
                 const successClearAll = new MessageEmbed()
-                        .setDescription(`Cleared all warnings from user <@${mentionedUser.id}>!`)
-                db.set(`warns.${mentionedUser.id}`, [])
+                    .setDescription(`Cleared all warnings from user <@${mentionedUser.id}>!`)
+                db.delete(`${mentionedUser.id}`)
                 return message.reply({ embeds: [successClearAll] });
             }
 
@@ -86,7 +88,7 @@ module.exports = {
                     for (i = 0; i < number; i++) {
                         if (warnDoc[i].number = i + 1) warnDoc[i].number = i + 1
                     }
-                    db.set(`warns.${mentionedUser.id}`, warnDoc)
+                    db.set(`${mentionedUser.id}`, warnDoc)
                     return message.reply({ embeds: [successEmbed] });
                 }
             })
@@ -112,7 +114,7 @@ module.exports = {
 
             const reason = args.slice(1).join(' ') || 'Not Specified';
 
-            let warnDoc = await db.fetch(`warns.${mentionedUser.id}`);
+            let warnDoc = await db.fetch(`${mentionedUser.id}`);
 
             if (!warnDoc) warnDoc = [];
 
@@ -127,8 +129,16 @@ module.exports = {
                 .setDescription(`You got warned in ${message.guild.name} by ${message.member.user}!`)
                 .addField(`Reason:`, `${reason ? `**${reason}**` : ''}`, false);
 
-            mentionedUser.send({ embeds: [DMWarnSuccess] });
-            db.set(`warns.${mentionedUser.id}`, warnDoc);
+            mentionedUser.createDM().then((DMChannel) => {
+                DMChannel
+                    .send({ embeds: [DMWarnSuccess] })
+                    .then(() => {
+
+                    }).catch((e) => {
+                        console.log('Failed to send warn msg!', e);
+                    });
+            });
+            db.set(`${mentionedUser.id}`, warnDoc);
 
             const embed = new MessageEmbed()
                 .setDescription(`Warned **${mentionedUser}** \n Reason: **${reason}**`)

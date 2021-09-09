@@ -1,6 +1,7 @@
 const { MessageEmbed, Permissions } = require('discord.js');
 const moment = require('moment');
-const db = require('quick.db');
+const quickdb = require('quick.db');
+const db = new quickdb.table('warns')
 
 const aliases = ['ui', 'userinfo'];
 
@@ -58,7 +59,7 @@ module.exports = {
             .setTimestamp();
 
         if (message.member.permissions.has([Permissions.FLAGS.KICK_MEMBERS, Permissions.FLAGS.BAN_MEMBERS])) {
-            let warnDoc = await db.fetch(`warns.${member.id}`);
+            let warnDoc = await db.fetch(`${member.id}`);
 
             if (!warnDoc) {
                 embed.addField(`Warnings`, `The user does not have any warnings!`)

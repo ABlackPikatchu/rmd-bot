@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
-const db = require('quick.db')
+const quickdb = require('quick.db')
+const db = new quickdb.table('roles')
 module.exports = {
         name: 'guildMemberRemove',
         once: false,
@@ -10,7 +11,7 @@ module.exports = {
                         rolesList.push(role.name);
                 })
 
-                db.set(`roles.${member.id}`, rolesList);
+                db.set(`${member.id}`, rolesList);
                 const goodbyeEmbed = new MessageEmbed();
 
                 goodbyeEmbed.setColor('#f00000')

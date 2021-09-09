@@ -17,11 +17,14 @@ const bot = new Discord.Client({
   partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 })
 bot.login(process.env.BOT_TOKEN);
+const quickdb = require('quick.db');
 bot.commands = new Discord.Collection();
 const botCommands = require('./commands');
 bot.config = require('./config.json');
 bot.prefix = bot.config.prefix;
-const emoji = require('./JSON/emoji.json')
+if (quickdb.get('prefix') != null) bot.prefix = quickdb.get('prefix');
+const emoji = require('./JSON/emoji.json');
+const autoMod = require('./autoMod/autoMod');
 
 Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
@@ -85,7 +88,7 @@ bot.on('messageCreate', msg => {
         msg.reply('there was an error trying to execute that command!');
       }
     }
-  }
+  } else autoMod.execute(msg, args, bot);
 });
 
 bot.on('interactionCreate', async interaction => {

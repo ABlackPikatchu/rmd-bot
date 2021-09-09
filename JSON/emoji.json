@@ -24,5 +24,8 @@
     "male_sign": "♂️",
     "female_sign": "♀️",
 
-    "white_large_square": "⬜"
+    "white_large_square": "⬜",
+
+    "thumbs_up": "👍",
+    "thumbs_down": "👎"
 }
