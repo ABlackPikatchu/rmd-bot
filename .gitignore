@@ -1,6 +1,7 @@
 .env
 .bat
 .sqlite
+json.sqlite
 slashCommandsRegister.js
 package.json
 node_modules/
