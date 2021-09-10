@@ -24,6 +24,7 @@ module.exports = {
   Warning: require('./moderation/warn'),
   Clear: require('./moderation/clear'),
   React: require('./moderation/react'),
+  AnimatedReact: require('./moderation/animated-react'),
   SetPrefix: require('./moderation/setprefix'),
 
   //Testing
