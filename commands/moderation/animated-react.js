@@ -12,6 +12,8 @@ module.exports = {
         } catch {}
         if (m != null) args.forEach(emoji => {
             if (emoji.toLowerCase() === 'animated_check') m.react(animatedEmoji.animated_check)
+            if (emoji.toLowerCase() === 'animated_test_tubes') m.react(animatedEmoji.animated_test_tubes)
+            if (emoji.toLowerCase() === 'announcement') m.react(animatedEmoji.announcement)
         });
     } else {
         const permsError = new MessageEmbed()

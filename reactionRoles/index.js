@@ -7,5 +7,8 @@ module.exports = {
     GenderRolesPanel: require('./gender-roles-panel'),
 
     //Test
-    TestPanel: require('./test-panel')
+    TestPanel: require('./test-panel'),
+
+    //Webhooks
+    RolesBotWebhook: require('./roles-bot-webhook')
 }
