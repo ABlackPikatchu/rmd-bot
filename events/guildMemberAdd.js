@@ -6,14 +6,18 @@ module.exports = {
         once: false,
         async execute(member) {
                 if (await db.fetch(`${member.id}`) == null) {
-                        db.set(`${member.id}`, `[]`);
+                        db.set(`${member.id}`, []);
                 }
                 let oldRoles = await db.fetch(`${member.id}`);
-                if (oldRoles != null) oldRoles.forEach(roleName => {
-                        role = member.guild.roles.cache.find(x => x.name === roleName);
-                        if (role) member.roles.add(role);
-                        else console.log(`Encountered error while re-adding on-join roles to ${member}: Unknown role name *${roleName}*`);
-                })
+                try {
+                        if (oldRoles != null) oldRoles.forEach(roleID => {
+                                role = member.guild.roles.cache.get(roleID);
+                                if (role) member.roles.add(role);
+                                else console.log(`Encountered error while re-adding on-join roles to ${member}: Unknown role name *${roleName}*`);
+                        })
+                } catch (e) {
+                        console.log(`Encountered error while add on-join roles to ${member}`, e)
+                }
                 db.delete(`${member.id}`);
                 if (member.guild.memberCount <= 100 && !member.roles.cache.has('871030809627349100')) member.roles.add(member.guild.roles.cache.find(i => i.name === 'Early Supporter'))
                 const welcomeEmbed = new MessageEmbed();
