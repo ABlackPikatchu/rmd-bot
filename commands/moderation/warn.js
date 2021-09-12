@@ -27,6 +27,7 @@ module.exports = {
     description: description,
     aliases: aliases,
     helpEmbed: helpEmbed,
+    hideFromHelp: true,
     permissions: [Permissions.FLAGS.BAN_MEMBERS, Permissions.FLAGS.KICK_MEMBERS],
     async execute(message, args, bot) {
         const type = args.shift().toLowerCase();

@@ -2,6 +2,7 @@ const { MessageEmbed, Permissions, GuildMember } = require('discord.js');
 module.exports = {
     name: 'ban',
     description: 'Bans a member!',
+    hideFromHelp: true,
     permissions: [Permissions.FLAGS.BAN_MEMBERS],
     async execute(message, args, bot) {
         const mentionedUser = message.mentions.members.first();

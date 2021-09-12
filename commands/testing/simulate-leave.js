@@ -2,6 +2,7 @@ module.exports = {
     name: 'simulate-leave',
     aliases: ['simleave'],
     description: 'Simulates an user leave',
+    hideFromHelp: true,
     execute (msg, args, bot) {
         if (!args[0]) bot.emit('guildMemberRemove', msg.member);
         else {

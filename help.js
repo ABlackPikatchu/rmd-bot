@@ -54,9 +54,11 @@ module.exports = {
       var description = 'Run *' + bot.prefix + 'help commandName* for help with a specific command!\n\nCommand List:\n';
       var addToDescription;
       Object.keys(botCommands).map(key => {
-        if (botCommands[key].aliases != null) addToDescription = "**" + botCommands[key].name + "**" + " (aliases: *" + botCommands[key].aliases + "*): " + botCommands[key].description + "\n";
-        else addToDescription = "**" + botCommands[key].name + "**: " + botCommands[key].description + "\n";
-        description += addToDescription;
+        if (!botCommands[key].hideFromHelp) {
+          if (botCommands[key].aliases != null) addToDescription = "**" + botCommands[key].name + "**" + " (aliases: *" + botCommands[key].aliases + "*): " + botCommands[key].description + "\n";
+          else addToDescription = "**" + botCommands[key].name + "**: " + botCommands[key].description + "\n";
+          description += addToDescription;
+        }
       });
       commandList.setDescription(description);
       msg.reply({ embeds: [commandList] });

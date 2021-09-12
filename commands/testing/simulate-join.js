@@ -2,6 +2,7 @@ module.exports = {
     name: 'simulate-join',
     aliases: ['simjoin'],
     description: 'Simulates an user join',
+    hideFromHelp: true,
     execute (msg, args, bot) {
         if (!args[0]) bot.emit('guildMemberAdd', msg.member);
         else {

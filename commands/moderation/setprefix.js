@@ -6,6 +6,7 @@ module.exports = {
     name: 'setprefix',
     permissions: [Permissions.FLAGS.ADMINISTRATOR],
     description: 'Sets the prefix of the bot!',
+    hideFromHelp: true,
     async execute(msg, args, bot) {
         var newPrefix = args[0];
         if (!newPrefix) return msg.reply('Please specify a new prefix');

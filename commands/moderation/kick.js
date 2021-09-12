@@ -1,6 +1,7 @@
 const { MessageEmbed, Permissions, GuildMember } = require('discord.js');
 module.exports = {
     name: 'kick',
+    hideFromHelp: true,
     description: 'Kicks a member!',
     permissions: [Permissions.FLAGS.KICK_MEMBERS],
     async execute(message, args, bot) {

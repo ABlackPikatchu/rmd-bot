@@ -1,7 +1,8 @@
 const { MessageEmbed, Permissions, GuildMember } = require('discord.js');
 module.exports = {
     name: 'unmute',
-    description: 'Unmutes a member!',
+	description: 'Unmutes a member!',
+	hideFromHelp: true,
     permissions: [Permissions.FLAGS.KICK_MEMBERS],
     async execute(message, args, bot) {
         const user = message.mentions.members.first();

@@ -3,6 +3,7 @@ const userReg = RegExp(/<@!?(\d+)>/);
 module.exports = {
     name: 'unban',
     description: 'Un-bans a member!',
+    hideFromHelp: true,
     permissions: [Permissions.FLAGS.BAN_MEMBERS],
     async execute(message, args, bot) {
         const userID = userReg.test(args[0]) ? userReg.exec(args[0])[1] : [0];
