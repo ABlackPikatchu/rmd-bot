@@ -18,6 +18,7 @@ const bot = new Discord.Client({
 })
 bot.login(process.env.BOT_TOKEN);
 const quickdb = require('quick.db');
+const customCommandsTable = new quickdb.table('commands');
 bot.commands = new Discord.Collection();
 const botCommands = require('./commands');
 bot.config = require('./JSON/config.json');
@@ -69,7 +70,10 @@ bot.on('messageCreate', msg => {
     if (command === 'help') {
       helpCommand.execute(msg, args, bot);
     } else {
-      if (!bot.commands.has(command)) return;
+      if (!bot.commands.has(command)) {
+        if (customCommandsTable.has(`${command}`)) return msg.reply(customCommandsTable.get(`${command}`).content);
+        else return;
+      }
 
       try {
         if (bot.commands.get(command).permissions == null) bot.commands.get(command).execute(msg, args, bot);

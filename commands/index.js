@@ -8,6 +8,9 @@ module.exports = {
   Good_Night: require('./good_night'),
   Embed: require('./embed'),
 
+  //Admin
+  CustomCommand: require('./admin/custom-command'),
+
   //Information
   UserInfo: require('./information/user-info'),
 
