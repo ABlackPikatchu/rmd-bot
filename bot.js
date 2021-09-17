@@ -85,7 +85,7 @@ bot.on('messageCreate', msg => {
             bot.commands.get(command).execute(msg, args, bot);
           } else {
             const permsError = new MessageEmbed()
-              .setDescription(`You do not have the required permissions to run the command: **` + command + "**!")
+              .setDescription(`${bot.normal_emojis.perms} You do not have the required permissions to run the command: **` + command + "**!")
               .setColor('RED');
             return msg.reply({ embeds: [permsError] });
           }
