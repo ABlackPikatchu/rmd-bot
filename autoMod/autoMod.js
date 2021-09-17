@@ -8,6 +8,7 @@ const index = require('./index.js');
 module.exports = {
     async execute(msg, args, bot) {
         if (!msg.guild) return;
+        if (msg.author.bot) return;
         try {
         if (msg.member.roles.cache.some(role => config.auto_mod.ignored_roles.includes(role.id))) return;
         } catch(e) {
