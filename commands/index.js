@@ -13,6 +13,7 @@ module.exports = {
 
   //Information
   UserInfo: require('./information/user-info'),
+  Colour: require('./information/colour'),
 
   //Moderation
   Slowmode: require('./moderation/slowmode'),

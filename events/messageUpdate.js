@@ -17,7 +17,7 @@ module.exports = {
         if (msg) msgEditedEmbed.addField(`After:`, `${msg}`, false)
         spamLogs.send({embeds: [msgEditedEmbed]});
         } catch (e) {
-            console.log(`Failed to create msg edited spam log`, e)
+            console.log(`Failed to create msg edited spam log`)
         }
 	},
 };

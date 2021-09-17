@@ -26,7 +26,8 @@ const botCommands = require('./commands');
 bot.config = require('./JSON/config.json');
 bot.prefix = bot.config.prefix;
 if (quickdb.get('prefix') != null) bot.prefix = quickdb.get('prefix');
-const emoji = require('./JSON/emoji.json');
+bot.normal_emojis = require('./JSON/emoji.json');
+bot.animated_emojis = require('./JSON/animated_emoji.json');
 const autoMod = require('./autoMod/autoMod');
 
 Object.keys(botCommands).map(key => {
@@ -89,9 +90,9 @@ bot.on('messageCreate', msg => {
             return msg.reply({ embeds: [permsError] });
           }
         }
-      } catch (error) {
-        console.error(error);
-        msg.reply('there was an error trying to execute that command!');
+      } catch (e) {
+        console.error(e);
+        msg.reply({embeds: [new MessageEmbed().setDescription(`${bot.normal_emojis.sadness} There was an error trying to execute that command!`).setColor('RED')]});
       }
     }
   } else if (bot.config.auto_mod.enabled) autoMod.execute(msg, args, bot);
