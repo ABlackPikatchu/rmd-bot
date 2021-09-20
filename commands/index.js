@@ -15,6 +15,9 @@ module.exports = {
   UserInfo: require('./information/user-info'),
   Colour: require('./information/colour'),
 
+  //Level
+  Level: require('./level/level'),
+
   //Moderation
   Slowmode: require('./moderation/slowmode'),
   Role: require('./moderation/role'),

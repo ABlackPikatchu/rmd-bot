@@ -3,7 +3,6 @@ const channels = require('../JSON/channels.json');
 module.exports = {
         name: 'messageDelete',
         execute(msg) {
-                if (msg.member.id === '879828191701774436') return;
                 try {
                         const spamLogs = msg.guild.channels.cache.get(channels.spam_logs);
                         const msgDeletedEmbed = new MessageEmbed()
