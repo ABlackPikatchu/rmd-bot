@@ -22,6 +22,9 @@
     	"xp_multiplier_per_level": 1.7,
     	"roles" : [
     		{"level": 5, "id": "871030809627349094"}
-    	]
+    	],
+    	"leaderboard": {
+    		"shown_users": 10
+    	}
     }
 }

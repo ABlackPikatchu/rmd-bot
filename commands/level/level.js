@@ -9,7 +9,7 @@ const backgrounds = fs.readdirSync('resources/assets/level').length;
 
 module.exports = {
 	name: "level",
-	"description": "Shows the level of a user",
+	description: "Shows the level of a user",
 	async execute(msg, args, bot) {
 		let member = msg.guild.members.cache.get(args[0]);
 		if (!member) member = msg.mentions.members.first();

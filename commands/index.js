@@ -2,6 +2,7 @@ module.exports = {
   Ping: require('./ping'),
   Pong: require('./pong'),
   Github: require('./github'),
+  BotGithub: require('./bot-github'),
   CurseForge: require('./curseforge'),
   Hi: require('./hi'),
   Rule: require('./rule'),
@@ -17,6 +18,8 @@ module.exports = {
 
   //Level
   Level: require('./level/level'),
+  Leaderboard: require('./level/leaderboard'),
+  SetXp: require('./level/set-xp'),
 
   //Moderation
   Slowmode: require('./moderation/slowmode'),
