@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const rules = require('../JSON/rules.json');
+const emojis = require('../JSON/emoji.json');
 
 const aliases = ['rules'];
 const description = 'Shows a rule';
@@ -28,7 +29,7 @@ module.exports = {
         const number = args.shift();
         if (!rules[number]) msg.reply("Unknown Rule!")
         else {
-            ruleEmbed.setTitle(`Rule ${number}`).setDescription(rules[number]).setColor('RANDOM');
+            ruleEmbed.setTitle(`${emojis.rules} Rule ${number}`).setDescription(rules[number]).setColor('RANDOM');
             msg.reply({embeds: [ruleEmbed]});
         }
     }
