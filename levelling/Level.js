@@ -13,16 +13,18 @@ module.exports = class Level {
 	toLevel() {
 		var xp = this.xp;
 		var level = 0;
-		let xpForNextLevel = config.levelling.level_1_xp;
-		for (var i = 1; i <= xp; i++) {
-			if (i === xpForNextLevel >> 0) {
+		var i = 0;
+		while (i == 0) {
+			if (xp >= this.xpForLevel(level)) {
 				level++;
-				xpForNextLevel = xpForNextLevel * config.levelling.xp_multiplier_per_level;
+				xp -= this.xpForLevel(level);
+			} else {
+				i = 1;
 			}
 		}
 		return level;
 	}
-	
+
 	getRank() {
 		const ranks = [];
 		levelTable.all().forEach(rank => {
@@ -33,20 +35,12 @@ module.exports = class Level {
 		return ranks.indexOf(`${this.xp}`) + 1;
 	}
 
-	remainingXp() {
-		return this.xp - this.xpForLevel(this.toLevel() - 1)
-	}
-	
 	xpForLevel(level) {
-		var xpForNextLevel = config.levelling.level_1_xp;
-		for (var i = 1; i <= level; i++) {
-			xpForNextLevel = xpForNextLevel * config.levelling.xp_multiplier_per_level;
-		}
-		return xpForNextLevel >> 0;
+		return (Math.pow(config.levelling.xp_multiplier_per_level, (level - 1))) * config.levelling.level_1_xp >> 0;
 	}
-	
+
 	xpForNextLevel() {
-		return this.xpForLevel(this.toLevel() + 1)
+		return this.xpForLevel(this.toLevel() + 2)
 	}
 
 	addXp() {

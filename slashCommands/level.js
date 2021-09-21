@@ -30,12 +30,17 @@ module.exports = {
 		const memberID = member.id;
 		const userLevel = new Level(levelTable.fetch(`${memberID}`));
 
-		let statusColour;
-		let status = member.presence.status;
-		if (status === "dnd") { statusColour = "#ff0048"; }
-		else if (status === "online") { statusColour = "#00fa81"; }
-		else if (status === "idle") { statusColour = "#ffbe00"; }
-		else { status = "streaming"; statusColour = "#a85fc5"; }
+		let statusColour = '#696969';
+		let status = "offline";
+		try {
+			status = member.presence.status;
+			if (status === "dnd") { statusColour = "#ff0048"; }
+			else if (status === "online") { statusColour = "#00fa81"; }
+			else if (status === "idle") { statusColour = "#ffbe00"; }
+			else { status = "streaming"; statusColour = "#a85fc5"; }
+		} catch (e) {
+
+		}
 
 		const reqXP = userLevel.xpForNextLevel() >> 0;
 		const currentXP = userLevel.xp >> 0;
