@@ -6,6 +6,7 @@ require('dotenv').config();
 const commands = [];
 const commandFiles = fs.readdirSync('./slashCommands').filter(file => file.endsWith('.js'));
 const utilitiesCommandFiles = fs.readdirSync('./slashCommands/utilities').filter(file => file.endsWith('.js'));
+const moderationCommandFiles = fs.readdirSync('./slashCommands/moderation').filter(file => file.endsWith('.js'));
 
 // Place your client and guild ids here
 const clientId = '879828191701774436';
@@ -18,6 +19,11 @@ for (const file of commandFiles) {
 
 for (const file of utilitiesCommandFiles) {
 	const command = require(`./slashCommands/utilities/${file}`);
+	commands.push(command.data.toJSON());
+}
+
+for (const file of moderationCommandFiles) {
+	const command = require(`./slashCommands/moderation/${file}`);
 	commands.push(command.data.toJSON());
 }
 

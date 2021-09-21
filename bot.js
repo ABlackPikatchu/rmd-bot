@@ -47,6 +47,7 @@ console.log("------------------------");
 bot.slashCommands = new Collection();
 const slashCommandFiles = fs.readdirSync('./slashCommands').filter(file => file.endsWith('.js'));
 const slashUtilitiesCommandFiles = fs.readdirSync('./slashCommands/utilities').filter(file => file.endsWith('.js'));
+const slashModerationCommandFiles = fs.readdirSync('./slashCommands/moderation').filter(file => file.endsWith('.js'));
 
 for (const file of slashCommandFiles) {
 	const command = require(`./slashCommands/${file}`);
@@ -56,6 +57,12 @@ for (const file of slashCommandFiles) {
 
 for (const file of slashUtilitiesCommandFiles) {
 	const command = require(`./slashCommands/utilities/${file}`);
+	bot.slashCommands.set(command.data.name, command);
+	console.log("Registered slash command: " + command.data.name);
+}
+
+for (const file of slashModerationCommandFiles) {
+	const command = require(`./slashCommands/moderation/${file}`);
 	bot.slashCommands.set(command.data.name, command);
 	console.log("Registered slash command: " + command.data.name);
 }

@@ -17,7 +17,8 @@ module.exports = {
 			return message.channel.send({embeds: [slowmodeError2]});
 		}
 		const currentSlowmode = message.channel.rateLimitPerUser;
-		const reason = args[1] ? args.slice(1).join(' ') : 'Not Specified';
+		let reason = args[1] ? args.slice(1).join(' ') : 'Not Specified';
+		if (!reason) reason = "Not Specified"
 
 		if (args[0] === 'off') {
 			if (currentSlowmode === 0) {
@@ -64,8 +65,7 @@ module.exports = {
 				.setTitle(`Slowmode Enabled`)
 				.addField(`Slowmode Duration`, args[0] + " seconds")
 				.setColor('#544B94');
-			if (reason != null) embed.addField(`Reason`, 'Not Specified')
-			else embed.addField(`Reason`, reason)
+			embed.addField(`Reason`, reason)
 			return message.channel.send({embeds: [embed]});
 		}
     }

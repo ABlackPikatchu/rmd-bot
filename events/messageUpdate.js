@@ -1,9 +1,11 @@
 const { MessageEmbed, WebhookClient } = require('discord.js');
 const channels = require('../JSON/channels.json');
+const roles = require('../JSON/roles.json');
 module.exports = {
 	name: 'messageUpdate',
 	execute(oldMsg, newMsg) {
         const msg = newMsg;
+		if (msg.member.roles.cache.has(roles.bot)) return;
         try {
         const spamLogs = msg.guild.channels.cache.get(channels.spam_logs);
         const msgEditedEmbed = new MessageEmbed()

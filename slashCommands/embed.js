@@ -15,16 +15,37 @@ const data = new SlashCommandBuilder()
 		description.setName('description')
 			.setDescription('The description of the embed')
 			.setRequired(true))
+	.setDefaultPermission(false)
+
 const channels = require('../JSON/channels.json');
 const roles = require('../JSON/roles.json');
 var RegExp = /^#[0-9A-F]{6}$/i;
 
 module.exports = {
 	data: data,
+	permissions: [
+		{
+			id: roles.staff,
+			type: 'ROLE',
+			permission: true,
+		},
+		{
+			id: roles.embed_creators,
+			type: 'ROLE',
+			permission: true,
+		},
+		{
+			id: roles.mod_maker,
+			type: 'ROLE',
+			permission: true,
+		}
+	],
 	async execute(interaction, bot) {
 		const msg = interaction;
-		if (msg.member.roles.cache.has(roles.staff) || msg.member.roles.cache.has(roles.embed_creators) || msg.channel == msg.guild.channels.cache.get(channels.self_promotion)) {
-
+		var canRun = false;
+		if (msg.member.roles.cache.has(roles.staff) || msg.member.roles.cache.has(roles.embed_creators)) canRun = true;
+		if (!canRun && msg.member.roles.cache.has(roles.mod_maker) && msg.channel == msg.guild.channels.cache.get(channels.self_promotion)) canRun = true;
+		if (canRun) {
 			const title = interaction.options.getString('title');
 			const colour = interaction.options.getString('colour');
 			const description = interaction.options.getString('description');
@@ -43,9 +64,8 @@ module.exports = {
 			embed.setTitle(title);
 			embed.setDescription(description);
 			msg.reply({ embeds: [embed] });
-
-		} else {
-			interaction.reply({ content: `You do not have the required roles to use this command`, ephemeral: true })
 		}
+
+		if (!canRun) interaction.reply({ embeds: [new MessageEmbed().setDescription(`You cannot run this command on this channel!`).setColor('RED')], ephemeral: true })
 	}
 };
