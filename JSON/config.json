@@ -31,5 +31,14 @@
     	"leaderboard": {
     		"shown_users": 10
     	}
+    },
+    
+    "cooldown" : {
+    	"ignored_roles": [
+    		"871030809744777221"
+    	],
+    	"ignored_members" : [
+    		"561254664750891009"
+    	]
     }
 }

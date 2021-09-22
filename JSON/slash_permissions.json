@@ -1,0 +1,13 @@
+{
+	"moderator": {
+		"id": "871030809744777223",
+		"type": "ROLE",
+		"permission": true
+	},
+	
+	"administrator": {
+		"id": "871030809744777224",
+		"type": "ROLE",
+		"permission": true
+	}
+}

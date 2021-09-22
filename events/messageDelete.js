@@ -1,5 +1,6 @@
 const { MessageEmbed, WebhookClient } = require('discord.js');
 const channels = require('../JSON/channels.json');
+const roles = require('@JSON/roles.json')
 module.exports = {
         name: 'messageDelete',
         execute(msg) {
@@ -13,7 +14,7 @@ module.exports = {
                         if (msg) msgDeletedEmbed.addField(`Message Content:`, `${msg} `, false)
                         spamLogs.send({ embeds: [msgDeletedEmbed] });
                 } catch (e) {
-                        console.log(`Failed to create msg deleted spam log`, e)
+                       
                 }
         },
 };

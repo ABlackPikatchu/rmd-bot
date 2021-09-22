@@ -1,3 +1,5 @@
+require('module-alias/register')
+
 const Discord = require('discord.js');
 require('dotenv').config();
 const { Intents, Collection, MessageEmbed } = require('discord.js');
@@ -79,6 +81,8 @@ for (const file of eventFiles) {
 	}
 }
 
+let recentlyRan = [];
+
 bot.on('messageCreate', msg => {
 	const args = msg.content.split(/ +/);
 	let command = args.shift().toLowerCase();
@@ -94,16 +98,17 @@ bot.on('messageCreate', msg => {
 			}
 
 			try {
-				if (bot.commands.get(command).permissions == null) bot.commands.get(command).execute(msg, args, bot);
+				if (bot.commands.get(command).permissions == null) execute(command, msg, args);
 				else {
 					if (msg.member.permissions.has(bot.commands.get(command).permissions)) {
-						bot.commands.get(command).execute(msg, args, bot);
+						execute(command, msg, args);
 					} else {
 						const permsError = new MessageEmbed()
 							.setDescription(`${bot.normal_emojis.perms} You do not have the required permissions to run the command: **` + command + "**!")
 							.setColor('RED');
 						return msg.reply({ embeds: [permsError] });
 					}
+
 				}
 			} catch (e) {
 				console.error(e);
@@ -128,5 +133,72 @@ bot.on('interactionCreate', async interaction => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+
+function execute(execCommand, msg, args) {
+	const command = bot.commands.get(execCommand);
+	const cooldown = command.cooldown;
+	const globalCooldown = command.globalCooldown;
+	const cooldownString = `${msg.guild.id}-${msg.member.id}-${command.name}`;
+	const globalCooldownString = `global-${msg.guild.id}-${command.name}`;
+
+	if (globalCooldown > 0) {
+		if (recentlyRan.includes(globalCooldownString)) {
+			let shouldIgnore = false;
+
+			try {
+				msg.member.roles.cache.forEach(role => {
+					if (bot.config.cooldown.ignored_roles.includes(`${role.id}`)) shouldIgnore = true;
+				})
+				
+				bot.config.cooldown.ignored_members.forEach(member => {
+					if (msg.member.id == member) shouldIgnore = true;
+				})
+			} catch (e) {
+				
+			}
+
+			if (!shouldIgnore) return msg.reply({ embeds: [new MessageEmbed().setDescription(`${bot.normal_emojis.hourglass_flowing_sand} You cannot run this command yet, as the command is on cooldown! Please wait!`).setColor('RED')] });
+		}
+		else {
+			recentlyRan.push(globalCooldownString)
+			setTimeout(() => {
+				recentlyRan = recentlyRan.filter((string) => {
+					return string !== globalCooldownString;
+				})
+			}, 1000 * globalCooldown);
+		}
+	}
+
+	if (cooldown > 0) {
+		if (recentlyRan.includes(cooldownString)) {
+			let shouldIgnore = false;
+
+			try {
+				msg.member.roles.cache.forEach(role => {
+					if (bot.config.cooldown.ignored_roles.includes(`${role.id}`)) shouldIgnore = true;
+				})
+				
+				bot.config.cooldown.ignored_members.forEach(member => {
+					if (msg.member.id == member) shouldIgnore = true;
+				})
+			} catch (e) {
+				
+			}
+
+			if (!shouldIgnore) return msg.reply({ embeds: [new MessageEmbed().setDescription(`${bot.normal_emojis.hourglass_flowing_sand} You cannot run this command yet, as you are on cooldown! Please wait!`).setColor('RED')] });
+		}
+		else {
+			recentlyRan.push(cooldownString)
+			setTimeout(() => {
+				recentlyRan = recentlyRan.filter((string) => {
+					return string !== cooldownString;
+				})
+			}, 1000 * cooldown);
+		}
+	}
+
+
+	command.execute(msg, args, bot);
+}
 
 module.exports = bot;

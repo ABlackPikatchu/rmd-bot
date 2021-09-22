@@ -16,10 +16,10 @@ module.exports = {
 				const command = client.guilds.cache.get('871030809627349093')?.commands.cache.find(i => i.name === slashCommand.data.name);
 				const perms = slashCommand.permissions;
 				setPerms(command, perms)
-				console.log(`Perms for command **${command.name}** have been set to: ${JSON.stringify(perms)}`)
+				///console.log(`Perms for command **${command.name}** have been set to: ${JSON.stringify(perms)}`)
 			}
 		});
-		console.log(`------------------------`);
+		//console.log(`------------------------`);
 		console.log(`Ready! Logged in as ${client.user.tag}! The prefix is *${client.prefix}*`);
 		client.user.setActivity("Run +help for a list of commands!", { type: 'PLAYING' });
 		console.log('Status set!');

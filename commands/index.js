@@ -11,6 +11,10 @@ module.exports = {
 
   //Admin
   CustomCommand: require('./admin/custom-command'),
+  Crosspost: require('./admin/crosspost'),
+
+  //Fun
+  Joke: require('./fun/joke'),
 
   //Information
   UserInfo: require('./information/user-info'),

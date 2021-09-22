@@ -21,21 +21,14 @@ const data = new SlashCommandBuilder()
 		return disable.setName('disable')
 			.setDescription('Disabled slowmode')
 	})
-const roles = require('../../JSON/roles.json');
+const roles = require('@JSON/roles.json');
+const slashPerms = require('@JSON/slash_permissions.json')
 
 module.exports = {
 	data: data,
 	permissions: [
-		{
-			id: roles.moderators,
-			type: 'ROLE',
-			permission: true
-		},
-		{
-			id: roles.administrators,
-			type: 'ROLE',
-			permission: true
-		}
+		slashPerms.administrator,
+		slashPerms.moderator
 	],
 	async execute(interaction, bot) {
 		const subCommand = interaction.options.getSubcommand();
